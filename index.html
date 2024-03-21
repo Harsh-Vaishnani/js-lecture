@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Sorting</title>
+    <style>
+        th {
+            width: 300px;
+            height: 50px;
+            background-color: black;
+            color: wheat;
+            font-size: 20px;
+        }
+
+        td {
+            background-color: rgba(124, 151, 199, 0.613);
+            color: black;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" style="text-align: center;">
+        <label for="name">Name</label>
+        <input id="name" type="name"><br><br>
+
+        <label for="email">Email</label>
+        <input id="email" type="email"><br><br>
+
+        <label for="password">Password</label>
+        <input id="password" type="password"><br><br>
+
+        <label for="number">Number</label>
+        <input id="number" type="number"><br><br>
+
+        <button id="btn-1">Submit</button>
+        <button id="btn-2">Sort</button>
+    </form>
+    <table style="margin: auto; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Number</th>
+            </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+    </table>
+</body>
+
+</html>
+<script>
+    let a = document.getElementById("name");
+    let b = document.getElementById("email");
+    let c = document.getElementById("password");
+    let d = document.getElementById("number");
+    let ee = document.getElementById("tb");
+
+    let sub = document.getElementById("btn-1");
+    let srt = document.getElementById("btn-2");
+
+    let arr = [];
+
+    sub.addEventListener("click", abc);
+    function abc(e) {
+        e.preventDefault();
+        let tr = document.createElement("tr");
+
+        let td1 = document.createElement("td");
+        td1.innerText = a.value;
+
+        let td2 = document.createElement("td");
+        td2.innerText = b.value;
+
+        let td3 = document.createElement("td");
+        td3.innerText = c.value;
+
+        let td4 = document.createElement("td");
+        td4.innerText = d.value;
+
+        tr.append(td1, td2, td3, td4);
+        ee.append(tr);
+        let obj = {
+            name: a.value,
+            email: b.value,
+            password: c.value,
+            number: d.value,
+        }
+        arr.push(obj);
+    }
+    srt.addEventListener("click", bca);
+    function bca(e) {
+        e.preventDefault();
+        arr.sort(function (a, b) {
+            return a.number - b.number;
+        })
+        ee.innerHTML="";
+        for (let i = 0; i < arr.length; i++) {
+            let tr = document.createElement("tr");
+
+            let td1 = document.createElement("td");
+            td1.innerText = arr[i].name;
+
+            let td2 = document.createElement("td");
+            td2.innerText = arr[i].email;
+
+            let td3 = document.createElement("td");
+            td3.innerText =arr[i].password;
+
+            let td4 = document.createElement("td");
+            td4.innerText = arr[i].number;
+
+            tr.append(td1, td2, td3, td4);
+            ee.append(tr);
+        }
+        console.log(arr);
+    }
+</script>
